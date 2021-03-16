@@ -153,13 +153,23 @@
 ##### _Query_ :
 
 ```sql
-
+select distinct Total from student;
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+
+| Total |
++-------+
+|   407 |
+|   400 |
+|   355 |
+|   476 |
+|   415 |
+|   470 |
+|   490 |
++-------+
 ```
 
 <hr>
@@ -171,13 +181,22 @@
 ##### _Query_ :
 
 ```sql
-
+select Roll,Sname from student where Gender='M';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+
+| Roll | Sname   |
++------+---------+
+|    1 | Anand   |
+|    2 | Ajay    |
+|    3 | Bharath |
+|    5 | Sarchin |
+|    6 | Dhoni   |
+|    8 | Varun   |
++------+---------+
 ```
 
 <hr>
