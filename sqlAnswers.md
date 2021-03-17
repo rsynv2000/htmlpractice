@@ -736,13 +736,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select sum(Total) from Student where Grade="A";
 ```
 
 ##### _Output_ :
 
 ```
-
++------------+
+| sum(Total) |
++------------+
+|       1436 |
++------------+
 ```
 
 <hr>
@@ -754,13 +758,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select avg(Average) from Student where Grade='A';
 ```
 
 ##### _Output_ :
 
 ```
-
++--------------+
+| avg(Average) |
++--------------+
+|    95.733333 |
++--------------+
 ```
 
 <hr>
@@ -772,13 +780,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select count(Roll) from student;
 ```
 
 ##### _Output_ :
 
 ```
-
++-------------+
+| count(Roll) |
++-------------+
+|           9 |
++-------------+
 ```
 
 <hr>
@@ -790,13 +802,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select count(distinct(Grade)) from Student;
 ```
 
 ##### _Output_ :
 
 ```
-
++------------------------+
+| count(distinct(Grade)) |
++------------------------+
+|                      4 |
++------------------------+
 ```
 
 <hr>
@@ -808,13 +824,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select * from Student where Dob in (SELECT MAX(Dob) FROM Student);
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |  
++------+---------+--------+------------+-------+---------+-------+  
+|    5 | Sarchin | M      | 2001-12-23 |   400 |   80.00 | C     |  
++------+---------+--------+------------+-------+---------+-------+  
 ```
 
 <hr>
@@ -834,7 +854,11 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Output_ :
 
 ```
-
++------------+------------+------------+
+| MAX(Dob)   | MIN(Dob)   | SUM(Total) |
++------------+------------+------------+
+| 2001-12-23 | 2001-04-02 |       2083 |
++------------+------------+------------+
 ```
 
 #### Q31.2
@@ -850,7 +874,11 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Output_ :
 
 ```
-
++----------+------------+------------+
+| COUNT(*) | MAX(Total) | MIN(Total) |
++----------+------------+------------+
+|        5 |        490 |        407 |
++----------+------------+------------+
 ```
 
 #### Q31.3
@@ -866,7 +894,11 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Output_ :
 
 ```
-
++----------------+
+| SUM(Total + 5) |
++----------------+
+|            360 |
++----------------+
 ```
 
 #### Q31.4
@@ -881,7 +913,11 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Output_ :
 
 ```
-
++----------------+
+| AVG(Total / 5) |
++----------------+
+|    84.73333333 |
++----------------+
 ```
 
 <hr>
@@ -893,13 +929,17 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+elect count(Gender),sum(Gender='M'),sum(Gender='F') from Student;
 ```
 
 ##### _Output_ :
 
 ```
-
++---------------+-----------------+-----------------+
+| count(Gender) | sum(Gender='M') | sum(Gender='F') |
++---------------+-----------------+-----------------+
+|             9 |               6 |               3 |
++---------------+-----------------+-----------------+
 ```
 
 <hr>
@@ -911,13 +951,20 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select max(Total),min(Total), Grade from Student group by Grade;
 ```
 
 ##### _Output_ :
 
 ```
-
++------------+------------+-------+
+| max(Total) | min(Total) | Grade |
++------------+------------+-------+
+|        490 |        470 | A     |
+|        415 |        407 | B     |
+|        400 |        400 | C     |
+|        355 |        355 | D     |
++------------+------------+-------+
 ```
 
 <hr>
@@ -929,13 +976,19 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select Grade,max(Total),min(Total) from student where year(Dob)=2001 group by Grade;
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+------------+------------+
+| Grade | max(Total) | min(Total) |
++-------+------------+------------+
+| A     |        476 |        476 |
+| B     |        407 |        407 |
+| C     |        400 |        400 |
++-------+------------+------------+
 ```
 
 <hr>
@@ -947,13 +1000,18 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select Grade,count(Roll) from Student where Grade='A' or Grade='B' group by Grade;
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+-------------+
+| Grade | count(Roll) |
++-------+-------------+
+| A     |           3 |
+| B     |           2 |
++-------+-------------+
 ```
 
 <hr>
@@ -965,13 +1023,18 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
-
+select Grade, count(Grade) from Student group by Grade having count(Grade)>2;
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+--------------+
+| Grade | count(Grade) |
++-------+--------------+
+| A     |            3 |
+| C     |            3 |
++-------+--------------+
 ```
 
 <hr>
@@ -983,13 +1046,22 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
+update Student set Dob='2000-11-12' where Sname='Varun';
 
+select * from Student where Sname='Varun';
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 1 row affected, 1 warning (0.152 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
 
+ +------+-------+--------+------------+-------+---------+-------+
+| Roll | Sname | Gender | Dob        | Total | Average | Grade |    
++------+-------+--------+------------+-------+---------+-------+    
+|    8 | Varun | M      | 2000-11-12 |   470 |   94.00 | A     |    
++------+-------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -1001,13 +1073,25 @@ select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname 
 ##### _Query_ :
 
 ```sql
+update student set Total=Total+10, Grade='B' 
+where Sname='Sarchin';
 
+select * from Student where Sname='Sarchin';
 ```
 
 ##### _Output_ :
 
 ```
+where Sname='Sarchin';
+Query OK, 1 row affected (0.132 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
+
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |  
++------+---------+--------+------------+-------+---------+-------+  
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |
++------+---------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -1021,12 +1105,30 @@ Note: 2 seperate queries to be executed. One for the view and another for the di
 ##### _Query_ :
 
 ```sql
+create view v1 as select * from student;
 
+v
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 0 rows affected
+
+
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |  
++------+---------+--------+------------+-------+---------+-------+  
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |  
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |  
+|    3 | Bharath | M      | 2000-11-05 |   355 |   71.00 | D     |  
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |  
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |  
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |  
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |  
+|    8 | Varun   | M      | 2000-11-12 |   470 |   94.00 | A     |  
+|    9 | Rekha   | F      | 2000-10-15 |   490 |   98.00 | A     |  
++------+---------+--------+------------+-------+---------+-------+ 
 
 ```
 
@@ -1039,13 +1141,13 @@ Note: 2 seperate queries to be executed. One for the view and another for the di
 ##### _Query_ :
 
 ```sql
-
+create view V2 as select Roll,Sname from Student where Grade='A';
 ```
 
 ##### _Output_ :
 
 ```
-
+Query OK, 0 rows affected
 ```
 
 <hr>
@@ -1057,13 +1159,19 @@ Note: 2 seperate queries to be executed. One for the view and another for the di
 ##### _Query_ :
 
 ```sql
-
+select * from V2;
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+
+| Roll | Sname   |
++------+---------+
+|    4 | Shivani |
+|    8 | Varun   |
+|    9 | Rekha   |
++------+---------+
 ```
 
 <hr>
@@ -1077,12 +1185,24 @@ Note: 2 seperate queries to be executed. One for the view and another for the di
 ##### _Query_ :
 
 ```sql
+create view v3 as select Roll as RollNo,Sname as Name from Student where Grade='A';
 
+select * from v3;
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 0 rows affected
+
+
++--------+---------+
+| RollNo | Name    |
++--------+---------+
+|      4 | Shivani |
+|      8 | Varun   |
+|      9 | Rekha   |
++--------+---------+
 
 ```
 
