@@ -208,13 +208,19 @@ select Roll,Sname from student where Gender='M';
 ##### _Query_ :
 
 ```sql
-
+SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+-------+
+| Roll | Sname |
++------+-------+
+|    1 | Anand |
+|    6 | Dhoni |
+|    8 | Varun |
++------+-------+
 ```
 
 <hr>
