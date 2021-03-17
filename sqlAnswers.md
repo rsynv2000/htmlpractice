@@ -232,13 +232,21 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select * from student where Total between 400 and 450;
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |  
++------+---------+--------+------------+-------+---------+-------+  
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |  
+|    5 | Sarchin | M      | 2001-12-23 |   400 |   80.00 | C     |  
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |  
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |  
++------+---------+--------+------------+-------+---------+-------+ 
 ```
 
 <hr>
@@ -250,13 +258,20 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+SELECT * FROM Student WHERE Gender='M' AND Total BETWEEN 400 AND 450;
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |  
++------+---------+--------+------------+-------+---------+-------+  
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |  
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |  
+|    5 | Sarchin | M      | 2001-12-23 |   400 |   80.00 | C     |  
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |
++------+---------+--------+------------+-------+---------+-------+ 
 ```
 
 <hr>
@@ -268,13 +283,25 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where Grade='A' or 
+Grade='B' or Grade='c';
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Anand   |
+| Ajay    |
+| Shivani |
+| Sarchin |
+| Dhoni   |
+| Kamala  |
+| Varun   |
+| Rekha   |
++---------+
 ```
 
 <hr>
@@ -286,13 +313,18 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where Gender='F' and (Grade='A' or Grade='B');
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Shivani |
+| Rekha   |
++---------+
 ```
 
 <hr>
@@ -304,13 +336,20 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select Roll from Student where Grade!='A' and Grade!='B';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+
+| Roll |
++------+
+|    2 |
+|    3 |
+|    5 |
+|    7 |
++------+
 ```
 
 <hr>
@@ -322,13 +361,21 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where year(Dob)="2001";
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Anand   |
+| Ajay    |
+| Shivani |
+| Sarchin |
+| Kamala  |
++---------+
 ```
 
 <hr>
@@ -340,13 +387,19 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where year(Dob)='2000' and month(Dob)='11';
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Bharath |
+| Dhoni   |
+| Varun   |
++---------+
 ```
 
 <hr>
@@ -358,13 +411,17 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+ select Sname from Student where year(Dob)='2000' and month(Dob)!='11';
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+
+| Sname |
++-------+
+| Rekha |
++-------+
 ```
 
 <hr>
@@ -376,12 +433,19 @@ SELECT Roll,Sname FROM Student WHERE Total>400 AND Gender='M';
 ##### _Query_ :
 
 ```sql
-
+select distinct Grade from student;
 ```
 
 ##### _Output_ :
 
-```
++-------+
+| Grade |
++-------+
+| B     |
+| C     |
+| D     |
+| A     |
++-------+```
 
 ```
 
@@ -398,13 +462,19 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select concat(Sname,' has scored an average of ',Average,' with grade ',Grade,'.') as 'Progress Of Female Students' from student where Gender='F';
 ```
 
 ##### _Output_ :
 
 ```
-
++------------------------------------------------------+
+| Progress Of Female Students                          |
++------------------------------------------------------+
+| Shivani has scored an average of 95.20 with grade A. |
+| Kamala has scored an average of 80.00 with grade C.  |
+| Rekha has scored an average of 98.00 with grade A.   |
++------------------------------------------------------+
 ```
 
 <hr>
@@ -416,13 +486,19 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname , Total/5 as 'Average' from student where Gender='F';
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+---------+
+| Sname   | Average |
++---------+---------+
+| Shivani | 95.2000 |
+| Kamala  | 80.0000 |
+| Rekha   | 98.0000 |
++---------+---------+
 ```
 
 <hr>
@@ -434,13 +510,18 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where Sname like 'A%';
 ```
 
 ##### _Output_ :
 
 ```
-
++-------+
+| Sname |
++-------+
+| Anand |
+| Ajay  |
++-------+
 ```
 
 <hr>
@@ -452,13 +533,17 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select roll,sname,Total from Student where Sname like 'A%' and Sname like '%d';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+-------+-------+
+| roll | sname | Total |
++------+-------+-------+
+|    1 | Anand |   407 |
++------+-------+-------+
 ```
 
 <hr>
@@ -470,13 +555,20 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select * from student where length(Sname)=5;
 ```
 
 ##### _Output_ :
 
 ```
-
++------+-------+--------+------------+-------+---------+-------+
+| Roll | Sname | Gender | Dob        | Total | Average | Grade |
++------+-------+--------+------------+-------+---------+-------+
+|    1 | Anand | M      | 2001-05-13 |   407 |   81.40 | B     |
+|    6 | Dhoni | M      | 2000-11-17 |   415 |   83.00 | B     |
+|    8 | Varun | M      | 2000-11-11 |   470 |   94.00 | A     |
+|    9 | Rekha | F      | 2000-10-15 |   490 |   98.00 | A     |
++------+-------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -488,13 +580,19 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select * from Student where Sname like '%i%';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |
++------+---------+--------+------------+-------+---------+-------+
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |
+|    5 | Sarchin | M      | 2001-12-23 |   400 |   80.00 | C     |
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |
++------+---------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -506,13 +604,21 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where Sname not like 'A%' and Sname not like 'S%';
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Bharath |
+| Dhoni   |
+| Kamala  |
+| Varun   |
+| Rekha   |
++---------+
 ```
 
 <hr>
@@ -524,13 +630,18 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student where day(Dob)='05';
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Bharath |
+| Kamala  |
++---------+
 ```
 
 <hr>
@@ -542,13 +653,25 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname from Student order by Sname;  
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| Sname   |
++---------+
+| Ajay    |
+| Anand   |
+| Bharath |
+| Dhoni   |
+| Kamala  |
+| Rekha   |
+| Sarchin |
+| Shivani |
+| Varun   |
++---------+
 ```
 
 <hr>
@@ -560,13 +683,19 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+ select Sname,Total from Student where Gender='F' order by Total desc;
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+-------+
+| Sname   | Total |
++---------+-------+
+| Rekha   |   490 |
+| Shivani |   476 |
+| Kamala  |   400 |
++---------+-------+
 ```
 
 <hr>
@@ -578,13 +707,24 @@ Shivani has scored an average of 95.2 with grade A.
 ##### _Query_ :
 
 ```sql
-
+select Sname,Grade,Total from Student where Total>395 order by Grade desc,Sname asc;
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+-------+-------+
+| Sname   | Grade | Total |
++---------+-------+-------+
+| Ajay    | C     |   400 |
+| Kamala  | C     |   400 |
+| Sarchin | C     |   400 |
+| Anand   | B     |   407 |
+| Dhoni   | B     |   415 |
+| Rekha   | A     |   490 |
+| Shivani | A     |   476 |
+| Varun   | A     |   470 |
++---------+-------+-------+
 ```
 
 <hr>
