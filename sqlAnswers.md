@@ -1217,13 +1217,34 @@ Note: First you will be adding a the column. Then you will be calculating the ag
 ##### _Query_ :
 
 ```sql
+ alter table Student add Age int;
 
+
+ UPDATE Student SET Age=TRUNCATe(DATEDIFF(CURRENT_DATE,Dob)/365 , 0);
+
+select  * from Student;
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 0 rows affected
 
+Query OK, 9 rows
+
++------+---------+--------+------------+-------+---------+-------+------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade | Age  |
++------+---------+--------+------------+-------+---------+-------+------+
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |   19 |
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |   19 |
+|    3 | Bharath | M      | 2000-11-05 |   355 |   71.00 | D     |   20 |
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |   19 |
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |   19 |
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |   20 |
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |   19 |
+|    8 | Varun   | M      | 2000-11-12 |   470 |   94.00 | A     |   20 |
+|    9 | Rekha   | F      | 2000-10-15 |   490 |   98.00 | A     |   20 |
++------+---------+--------+------------+-------+---------+-------+------+
 ```
 
 <hr>
@@ -1235,13 +1256,31 @@ Note: First you will be adding a the column. Then you will be calculating the ag
 ##### _Query_ :
 
 ```sql
+alter table Student drop column Age;
+
+
+select * from Student;
 
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 0 rows affected 
 
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |
++------+---------+--------+------------+-------+---------+-------+
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |
+|    3 | Bharath | M      | 2000-11-05 |   355 |   71.00 | D     |
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |
+|    8 | Varun   | M      | 2000-11-12 |   470 |   94.00 | A     |
+|    9 | Rekha   | F      | 2000-10-15 |   490 |   98.00 | A     |
++------+---------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -1263,12 +1302,62 @@ Note:
 ##### _Query_ :
 
 ```sql
+desc Student;
+select * from Student ;
+alter table Student modify column Average float(10,2);
+desc Student;
+select * from Student;
 
 ```
 
 ##### _Output_ :
 
 ```
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| Roll    | int(11)       | NO   |     | NULL    |       |
+| Sname   | char(15)      | YES  |     | NULL    |       |
+| Gender  | char(2)       | YES  |     | NULL    |       |
+| Dob     | date          | YES  |     | NULL    |       |
+| Total   | int(11)       | YES  |     | NULL    |       |
+| Average | decimal(10,2) | YES  |     | NULL    |       |
+| Grade   | char(2)       | YES  |     | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+
+
+
+
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |
++------+---------+--------+------------+-------+---------+-------+
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |
+|    3 | Bharath | M      | 2000-11-05 |   355 |   71.00 | D     |
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |
+|    8 | Varun   | M      | 2000-11-12 |   470 |   94.00 | A     |
+|    9 | Rekha   | F      | 2000-10-15 |   490 |   98.00 | A     |
++------+---------+--------+------------+-------+---------+-------+
+
+
+Query OK, 9 rows affected
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Roll    | int(11)     | NO   |     | NULL    |       |
+| Sname   | char(15)    | YES  |     | NULL    |       |
+| Gender  | char(2)     | YES  |     | NULL    |       |
+| Dob     | date        | YES  |     | NULL    |       |
+| Total   | int(11)     | YES  |     | NULL    |       |
+| Average | float(10,2) | YES  |     | NULL    |       |
+| Grade   | char(2)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+
 
 ```
 
@@ -1281,13 +1370,19 @@ Note:
 ##### _Query_ :
 
 ```sql
-
+select Total/5 as New_Avg from Student where Gender='F';;
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+
+| New_Avg |
++---------+
+| 95.2000 |
+| 80.0000 |
+| 98.0000 |
++---------+
 ```
 
 <hr>
