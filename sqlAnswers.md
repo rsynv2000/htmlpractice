@@ -1394,13 +1394,21 @@ select Total/5 as New_Avg from Student where Gender='F';;
 ##### _Query_ :
 
 ```sql
-
+select Student.Sname,Personal.Parent,Personal.Address from Student INNER JOIN Personal ON Student.Roll=Personal.Roll;
 ```
 
 ##### _Output_ :
 
 ```
-
++---------+--------+------------------+
+| Sname   | Parent | Address          |
++---------+--------+------------------+
+| Ajay    | ABC    | 1st Cross Street |
+| Bharath | XYZ    | 2nd Cross Street |
+| Shivani | PQR    | 3rd Cross Street |
+| Kamala  | LMN    | 4th Cross Street |
+| Rekha   | ABCD   | 5th Cross Street |
++---------+--------+------------------+
 ```
 
 <hr>
@@ -1412,13 +1420,18 @@ select Total/5 as New_Avg from Student where Gender='F';;
 ##### _Query_ :
 
 ```sql
-
+select s.Roll,s.Sname,p.Parent from Personal p inner join student s on p.Roll=s.Roll where grade='A';
 ```
 
 ##### _Output_ :
 
 ```
-
++------+---------+--------+
+| Roll | Sname   | Parent |
++------+---------+--------+
+|    4 | Shivani | PQR    |
+|    9 | Rekha   | ABCD   |
++------+---------+--------+
 ```
 
 <hr>
@@ -1430,13 +1443,29 @@ select Total/5 as New_Avg from Student where Gender='F';;
 ##### _Query_ :
 
 ```sql
+delete from student where Grade='D';
 
+select * from Student ;
 ```
 
 ##### _Output_ :
 
 ```
+Query OK, 1 row affected
 
+
++------+---------+--------+------------+-------+---------+-------+
+| Roll | Sname   | Gender | Dob        | Total | Average | Grade |
++------+---------+--------+------------+-------+---------+-------+
+|    1 | Anand   | M      | 2001-05-13 |   407 |   81.40 | B     |
+|    2 | Ajay    | M      | 2001-04-02 |   400 |   80.00 | C     |
+|    4 | Shivani | F      | 2001-05-06 |   476 |   95.20 | A     |
+|    5 | Sarchin | M      | 2001-12-23 |   410 |   80.00 | B     |
+|    6 | Dhoni   | M      | 2000-11-17 |   415 |   83.00 | B     |
+|    7 | Kamala  | F      | 2001-12-05 |   400 |   80.00 | C     |
+|    8 | Varun   | M      | 2000-11-12 |   470 |   94.00 | A     |
+|    9 | Rekha   | F      | 2000-10-15 |   490 |   98.00 | A     |
++------+---------+--------+------------+-------+---------+-------+
 ```
 
 <hr>
@@ -1448,13 +1477,13 @@ select Total/5 as New_Avg from Student where Gender='F';;
 ##### _Query_ :
 
 ```sql
-
+drop table student;
 ```
 
 ##### _Output_ :
 
 ```
-
+Query OK, 0 rows affected
 ```
 
 <hr>
