@@ -4,7 +4,7 @@
 
 -   Database Name : `sqlpractice`
 -   Table Names : `Student` and `Personal`
--   #### Tables Involved:
+-   #### Tables Involved are:
 
     -   ##### _Student_ Table
 
